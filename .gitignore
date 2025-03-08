@@ -1,0 +1,4 @@
+node_modules/*
+.env
+cadangan/*
+serviceAccountKey.json
