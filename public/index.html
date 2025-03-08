@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f5f5f5;
+    }
+
+    .main-menu {
+      text-align: center;
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .title {
+      font-size: 3rem;
+      color: #2c3e50;
+      margin-bottom: 4rem;
+      margin-top: 20vh;
+    }
+
+    .menu-button {
+      background-color: #3498db;
+      color: white;
+      padding: 1.5rem 3rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.5rem;
+      margin: 1rem auto;
+      cursor: pointer;
+      width: 300px;
+      transition: transform 0.2s;
+    }
+
+    .menu-button:hover {
+      transform: scale(1.05);
+    }
+
+    .tap-section {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .coin-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tap-instruction {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #666;
+      margin-top: 10vh;
+    }
+
+    .tap-button {
+      background-color: #2980b9;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.1s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .tap-button:active {
+      transform: scale(0.95);
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .shop-section {
+      display: none;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .shop-section h2 {
+      color: #2c3e50;
+      margin-top: 70px;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    
+    .kendaraan-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .kendaraan-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    
+    .kendaraan-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .kendaraan-card h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    
+    .kendaraan-card p {
+      margin: 8px 0;
+      color: #666;
+    }
+    
+    .kendaraan-card button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+    
+    .kendaraan-card button:hover {
+      background-color: #2ecc71;
+    }
+    
+    .kendaraan-card button:disabled {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .status-badge.error {
+      background-color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div id="connectionStatus"></div>
+
+  <div class="main-menu" id="mainMenu">
+    <h1 class="title">Kendaraan Shop</h1>
+    <button class="menu-button" onclick="showTapSection()">Get Coin</button>
+    <button class="menu-button" onclick="showShop()">Buy Item</button>
+  </div>
+
+  <div class="tap-section" id="tapSection">
+    <div class="coin-logo">
+      🪙<span id="coinCount">0</span>
+    </div>
+    <button class="back-button" onclick="showMainMenu()">Kembali</button>
+    
+    <div class="tap-instruction">Tap this to get money!</div>
+    <button class="tap-button" onclick="tambahKoin()">TAP</button>
+  </div>
+
+  <div class="shop-section" id="shopSection">
+    <div class="coin-logo">
+      🪙<span id="shopCoinCount">0</span>
+    </div>
+    <button class="back-button" onclick="showMainMenu()">Kembali</button>
+    <h2>Daftar Kendaraan</h2>
+    <div class="kendaraan-list" id="kendaraanList">
+      <p>Loading kendaraan...</p>
+    </div>
+  </div>
+
+  <script>
+    let coins = parseInt(localStorage.getItem('coins') || '0');
+    updateCoinDisplay();
+    
+    function updateCoinDisplay() {
+      document.getElementById('coinCount').textContent = coins;
+      document.getElementById('shopCoinCount').textContent = coins;
+    }
+
+    function showMainMenu() {
+      document.getElementById('mainMenu').style.display = 'flex';
+      document.getElementById('tapSection').style.display = 'none';
+      document.getElementById('shopSection').style.display = 'none';
+    }
+
+    function showTapSection() {
+      document.getElementById('mainMenu').style.display = 'none';
+      document.getElementById('tapSection').style.display = 'block';
+      document.getElementById('shopSection').style.display = 'none';
+      updateCoinDisplay();
+    }
+
+    function showShop() {
+      document.getElementById('mainMenu').style.display = 'none';
+      document.getElementById('tapSection').style.display = 'none';
+      document.getElementById('shopSection').style.display = 'block';
+      updateCoinDisplay();
+      loadKendaraan();
+    }
+
+    function showConnectionStatus(message, isError = false) {
+      const statusElement = document.getElementById('connectionStatus');
+      statusElement.innerHTML = `<div class="status-badge ${isError ? 'error' : ''}">${message}</div>`;
+      
+      setTimeout(() => {
+        statusElement.innerHTML = '';
+      }, 3000);
+    }
+
+    async function tambahKoin() {
+      coins++;
+      localStorage.setItem('coins', coins.toString());
+      updateCoinDisplay();
+      
+      try {
+        await fetch('/api/tambah-koin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ coins: 1 })
+        });
+      } 
+      
+      catch (error) {
+        console.error('Error syncing coins:', error);
+      }
+    }
+
+    async function checkDatabaseConnection() {
+      try {
+        const response = await fetch('/api/check-db');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.connected) {
+          showConnectionStatus('Database Connected');
+          return true;
+        } 
+        
+        else {
+          showConnectionStatus('Database Connection Failed: ' + (data.error || 'Unknown error'), true);
+          return false;
+        }
+      } 
+      
+      catch (error) {
+        console.error('Error checking database connection:', error);
+        showConnectionStatus('Server Connection Failed', true);
+        return false;
+      }
+    }
+
+      async function loadKendaraan() {
+    document.getElementById('kendaraanList').innerHTML = '<p>Memuat data kendaraan...</p>';
+    
+    try {
+      const isConnected = await checkDatabaseConnection();
+      
+      if (!isConnected) {
+        document.getElementById('kendaraanList').innerHTML = 
+          `<div style="text-align: left; max-width: 600px; margin: 0 auto; background: #ffeeee; padding: 20px; border-radius: 10px;">
+            <h3>Firebase Database Error</h3>
+            <p>Cannot connect to the Firebase Realtime Database.</p>
+            <button onclick="loadKendaraan()" class="menu-button" style="width: auto; margin-top: 20px;">Coba Lagi</button>
+          </div>`;
+        return;
+      }
+      
+      const response = await fetch('/api/kendaraan');
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error server: ${response.status} - ${errorText}`);
+      }
+      
+      const data = await response.json();
+      console.log("Data kendaraan diterima:", data);
+      
+      if (!Array.isArray(data)) {
+        throw new Error('Format data yang diterima dari server tidak valid');
+      }
+      
+      if (data.length === 0) {
+        document.getElementById('kendaraanList').innerHTML = 
+          `<p>Tidak ada kendaraan tersedia</p>
+          <p>Pastikan Firebase database Anda sudah diisi dengan data kendaraan</p>
+          <button onclick="resetData()" class="menu-button" style="width: auto; margin-top: 20px;">Reset Data</button>`;
+        return;
+      }
+      
+      const container = document.getElementById('kendaraanList');
+      container.innerHTML = data.map(k => 
+      `<div class="kendaraan-card">
+          <h3>${k.merk_kendaraan || 'Tidak diketahui'}</h3>
+          <p>Plat: ${k.plat_nomor || 'Tidak diketahui'}</p>
+          <p>Warna: ${k.warna_kendaraan || 'Tidak diketahui'}</p>
+          <p>Tahun: ${k.tahun_pembelian || 'Tidak diketahui'}</p>
+          <p>Harga: ${k.harga} Koin</p>
+          <button 
+            onclick="beliKendaraan('${k.plat_nomor}', ${k.harga})" 
+            ${coins < k.harga ? 'disabled' : ''}
+          >
+            ${coins < k.harga ? 'KOIN TIDAK CUKUP' : 'BELI'}
+          </button>
+        </div>`).join('');
+    } 
+
+
+    catch (error) {
+      console.error('Error memuat kendaraan:', error);
+      document.getElementById('kendaraanList').innerHTML = 
+        `<div style="text-align: left; max-width: 600px; margin: 0 auto; background: #ffeeee; padding: 20px; border-radius: 10px;">
+          <h3>Error memuat kendaraan:</h3>
+          <p>${error.message}</p>
+          <button onclick="loadKendaraan()" class="menu-button" style="width: auto; margin-top: 20px;">Coba Lagi</button>
+          <button onclick="resetData()" class="menu-button" style="width: auto; margin-top: 20px; margin-left: 10px;">Reset Data</button>
+        </div>`;
+    }
+  }
+
+    async function resetData() {
+      showConnectionStatus('This function has been removed', true);
+      loadKendaraan();
+    }
+
+    async function beliKendaraan(plat, harga) {
+      if(coins < harga) {
+        alert('Koin tidak cukup!');
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/kendaraan/${plat}`, { 
+          method: 'DELETE'
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to purchase vehicle');
+        }
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          coins -= harga;
+          localStorage.setItem('coins', coins.toString());
+          updateCoinDisplay();
+          loadKendaraan();
+          alert('Berhasil membeli kendaraan!');
+        }
+      } catch (error) {
+        console.error('Error buying kendaraan:', error);
+        alert('Gagal membeli kendaraan: ' + error.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkDatabaseConnection);
+  </script>
+</body>
+</html>

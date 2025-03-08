@@ -1,0 +1,25 @@
+--
+-- Table structure for table `kendaraan`
+--
+
+DROP TABLE IF EXISTS `kendaraan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kendaraan` (
+  `plat_nomor` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `tahun_pembelian` int NOT NULL,
+  `warna_kendaraan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `merk_kendaraan` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`plat_nomor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kendaraan`
+--
+
+LOCK TABLES `kendaraan` WRITE;
+/*!40000 ALTER TABLE `kendaraan` DISABLE KEYS */;
+INSERT INTO `kendaraan` VALUES ('AB-2171-AT',2021,'Biru','Mitsubishi L300'),('AB-6141-GO',2018,'Biru','Isuzu Elf'),('AB-7578-WE',2019,'Abu-abu','Toyota Hilux'),('AB-7889-AW',2019,'Silver','Yamaha NMAX'),('AB-8860-MW',2022,'Merah','Daihatsu Gran Max'),('AB-9336-NV',2021,'Putih','Daihatsu Gran Max'),('AG-1230-YS',2022,'Silver','Kawasaki KLX'),('AG-2886-VL',2023,'Abu-abu','Kawasaki KLX'),('B-1750-KR',2019,'Silver','Toyota Hilux'),('B-2549-FO',2019,'Hitam','Yamaha Aerox'),('B-3265-YA',2019,'Putih','Suzuki NEX'),('B-3607-IU',2023,'Merah','Fuso Canter'),('B-4247-MK',2021,'Merah','Toyota Hilux'),('B-5210-AQ',2018,'Abu-abu','Toyota Hilux'),('B-5391-JL',2018,'Hitam','Isuzu Elf'),('B-5580-QQ',2019,'Silver','Isuzu Elf'),('B-5837-CW',2018,'Merah','Isuzu Elf'),('B-6002-BR',2018,'Biru','Mitsubishi L300'),('B-6504-XS',2022,'Biru','Hino Dutro'),('B-6629-IR',2020,'Hitam','Mitsubishi L300'),('B-6730-XQ',2020,'Silver','Honda ADV'),('B-7495-YQ',2019,'Silver','Yamaha Aerox'),('B-7503-TQ',2022,'Hitam','Isuzu Elf'),('B-7558-WE',2019,'Putih','Mitsubishi L300'),('B-7693-VY',2019,'Silver','Yamaha NMAX'),('B-7743-NH',2023,'Biru','Fuso Canter'),('B-9194-DX',2018,'Biru','Kawasaki KLX'),('B-9783-BI',2020,'Hitam','Hino Dutro'),('B-9878-BI',2020,'Putih','Honda Vario'),('D-5926-MW',2022,'Putih','Isuzu Elf'),('D-7018-JT',2021,'Putih','Yamaha NMAX'),('D-8397-WX',2023,'Biru','Yamaha NMAX'),('F-1099-FA',2020,'Abu-abu','Isuzu Elf'),('F-1357-CI',2019,'Biru','Isuzu Elf'),('F-1385-JT',2022,'Hitam','Kawasaki KLX'),('F-1522-KV',2023,'Abu-abu','Yamaha Aerox'),('F-1852-IK',2023,'Biru','Hino Dutro'),('F-1903-MB',2023,'Putih','Yamaha Aerox'),('F-2011-II',2021,'Hitam','Yamaha NMAX'),('F-2169-IG',2019,'Biru','Yamaha Aerox'),('F-2552-UJ',2020,'Hitam','Daihatsu Gran Max'),('F-2624-OF',2020,'Silver','Hino Dutro'),('F-2839-RR',2019,'Merah','Honda Vario'),('F-3052-DY',2019,'Biru','Toyota Hilux'),('F-3201-WP',2020,'Silver','Kawasaki KLX'),('F-3348-JZ',2022,'Abu-abu','Isuzu Elf'),('F-3578-CS',2018,'Merah','Hino Dutro'),('F-3722-RN',2021,'Silver','Mitsubishi L300'),('F-3745-QI',2022,'Silver','Toyota Hilux'),('F-3862-EV',2022,'Abu-abu','Honda Vario'),('F-3917-MI',2019,'Merah','Honda ADV'),('F-4264-FA',2020,'Abu-abu','Suzuki NEX'),('F-4386-UU',2021,'Biru','Isuzu Elf'),('F-4452-FW',2022,'Putih','Yamaha Aerox'),('F-4585-HG',2020,'Hitam','Yamaha Aerox'),('F-4645-ZR',2020,'Abu-abu','Suzuki NEX'),('F-4845-PU',2018,'Putih','Daihatsu Gran Max'),('F-4947-FU',2019,'Biru','Mitsubishi L300'),('F-5142-NE',2020,'Silver','Daihatsu Gran Max'),('F-5279-JI',2021,'Hitam','Yamaha NMAX'),('F-5582-EK',2020,'Hitam','Fuso Canter'),('F-5650-DF',2021,'Putih','Toyota Hilux'),('F-5677-LS',2018,'Merah','Hino Dutro'),('F-5840-VN',2018,'Putih','Fuso Canter'),('F-5843-OD',2023,'Merah','Toyota Hilux'),('F-5992-JD',2021,'Biru','Fuso Canter'),('F-6397-OY',2018,'Silver','Daihatsu Gran Max'),('F-6500-ST',2021,'Putih','Daihatsu Gran Max'),('F-6517-WK',2020,'Putih','Toyota Hilux'),('F-6573-DU',2020,'Putih','Yamaha Aerox'),('F-6616-UD',2019,'Abu-abu','Kawasaki KLX'),('F-6624-SQ',2018,'Silver','Mitsubishi L300'),('F-6756-TT',2021,'Merah','Toyota Hilux'),('F-6795-JV',2018,'Biru','Fuso Canter'),('F-6795-SS',2020,'Biru','Fuso Canter'),('F-7157-DQ',2022,'Merah','Mitsubishi L300'),('F-7189-KX',2019,'Biru','Mitsubishi L300'),('F-7241-TT',2020,'Biru','Kawasaki KLX'),('F-7463-ZU',2018,'Merah','Mitsubishi L300'),('F-7672-IL',2019,'Abu-abu','Toyota Hilux'),('F-7679-QX',2021,'Silver','Yamaha NMAX'),('F-7692-FX',2023,'Biru','Honda Vario'),('F-7932-RC',2020,'Biru','Kawasaki KLX'),('F-8010-LY',2020,'Abu-abu','Honda Vario'),('F-8061-BW',2019,'Biru','Hino Dutro'),('F-8343-JI',2021,'Hitam','Toyota Hilux'),('F-8360-NF',2020,'Merah','Yamaha NMAX'),('F-8435-MY',2019,'Hitam','Hino Dutro'),('F-8676-RT',2022,'Silver','Kawasaki KLX'),('F-8698-IA',2018,'Merah','Honda Vario'),('F-8794-EH',2023,'Biru','Kawasaki KLX'),('F-8953-NY',2018,'Biru','Hino Dutro'),('F-9123-TB',2018,'Hitam','Yamaha Aerox'),('F-9544-DX',2018,'Biru','Daihatsu Gran Max'),('F-9546-EC',2023,'Silver','Mitsubishi L300'),('F-9683-AD',2022,'Putih','Hino Dutro'),('F-9831-HK',2019,'Putih','Hino Dutro');
+/*!40000 ALTER TABLE `kendaraan` ENABLE KEYS */;
+UNLOCK TABLES;
